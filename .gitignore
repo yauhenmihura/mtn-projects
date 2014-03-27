@@ -1,5 +1,5 @@
 *.class
-
+dist
 # Package Files #
 *.war
 *.ear
