@@ -2,15 +2,13 @@ package com.test;
 
 //dependency on Apache commons-collections
 import org.apache.commons.collections.Predicate;
+import org.junit.Test;
 
 class Project {
-
-  public static void test() {
+   
+  @Test
+  public void test() {
     System.out.println("test");
-  }
-  
-  public static void main(String[] args) {
-    System.out.println("Hellow MTN");
   }
 
 }
