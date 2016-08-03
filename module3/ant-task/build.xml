@@ -1,0 +1,67 @@
+<project name="mihura_project" default="dist" basedir=".">
+
+<!-- Define the properties used by the build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+  <property name="config" location="config"/>
+  <property name="lib" location="lib"/>
+  <property name="src" location="src"/>
+  <property name="test" location="test"/>
+
+<!-- Define the CLASSPATH -->
+ <path id="build.classpath">
+    <fileset dir="${lib}">
+      <include name="*.jar"/>
+    </fileset>
+ </path>
+
+ <target name="clean"
+		description="Deletes all files created during previous build">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+ </target>  
+
+ <target name="init" depends="clean"
+		description="Initialize some global build properties">
+   <tstamp>
+     <format property="component.timestamp" pattern="yyyy_MM_dd-hh:mm:ss aa"/>
+   </tstamp> 
+   <mkdir dir="${build}"/>
+   <mkdir dir="${dist}"/>
+  </target>
+
+  <target name="compile" depends="init"
+		description="Compiles .java into .class">
+   <javac includeantruntime="false" srcdir="${lib}" destdir="${build}" classpathref="build.classpath"/>
+  </target>
+
+<target name="test" depends="compile"
+		description="Executes test inside test folder">    
+ <junit> 
+      <classpath refid="build.classpath"/>     
+      <formatter type="brief" usefile="false"/>  
+ 	<batchtest>      
+ 	  <fileset dir="${test}">   
+ 	  <include name="${test}/com/test/UnitTest.java"/>       
+ 	  </fileset>    
+ 	</batchtest>        
+ </junit>     
+</target>
+
+  <target name="jar" depends="test"
+		description="Create .jar file from compiled class">
+    <mkdir dir="${dist}"/>
+    <jar jarfile="${dist}/lib/mihura_project.jar" basedir="${build}"/>
+  </target>
+
+<target name="dist" depends="jar"
+		description="Create artifact containing built jar file,props and dependencies">
+   <zip destfile="${dist}/artefact-${component.timestamp}.zip">
+      <zipfileset dir="${config}"/>
+      <zipfileset dir="${dist}"/>
+      <zipfileset dir="${lib}" prefix="lib"/>
+   </zip>
+</target>
+
+</project>
