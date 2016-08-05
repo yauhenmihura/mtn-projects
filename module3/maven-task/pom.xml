@@ -58,7 +58,7 @@
  </plugins>
 </build>
 
-<!-- Depends -->
+<!-- Dependsy -->
 <dependencies>  
    <dependency>
      <groupId>junit</groupId>
