@@ -72,6 +72,15 @@
     <artifactId>commons-collections</artifactId>
     <version>3.2.1</version>
    </dependency>
+
+   <dependency>
+    <groupId>org.codehaus.sonar</groupId>
+    <artifactId>sonar-maven-plugin</artifactId>
+    <version>5.1</version>
+   </dependency>
+
+
+
 </dependencies> 
 
 </project>
